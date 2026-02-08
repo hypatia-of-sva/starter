@@ -10,8 +10,9 @@ int main(int argc, char** argv) {
     if(argc < 2 || strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
         char* programname = (argc >= 1 ? argv[0] : "starter"); 
         printf(
-            "\nUsage: %s FILENAME\n"
-            "FILENAME should refer to an accepted .so for %s\n\n"
+            "\nUsage: %s FILENAME ...\n"
+            "FILENAME should refer to an accepted .so for %s\n"
+            "Any arguments after FILENAME are directly passed through to the .so's argv.\n\n"
             "Such an .so needs to include the following entry point:\n"
             "\tint start(int argc, char** argv, dlysm_func_t loader) { ... }\n"
             "where dlysm_func_t is the function pointer type\n"

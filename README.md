@@ -3,8 +3,10 @@ Program starting util that allows libc functions to be used without linking a sp
 
 Run `build.sh` to build the tool and the test, it requires gcc and a unix shell
 
-Usage: `starter FILENAME`.
+Usage: `starter FILENAME ...`.
 `FILENAME` should refer to an accepted .so for starter
+
+Any arguments after `FILENAME` are directly passed through to the .so's argv.
 
 Such an .so needs to include the following entry point:
 
