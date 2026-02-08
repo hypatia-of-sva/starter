@@ -25,12 +25,13 @@ int main(int argc, char** argv) {
     char* objectname = argv[1];
     void* object = dlopen(objectname, RTLD_NOW | RTLD_GLOBAL);
     if(object == NULL) {
-        printf("%s: Error! Could not load object file %s, dlopen exited with dlerror %s\n", argv[0], objectname, dlerror());
+        fprintf(stderr, "%s: Error! Could not load object file %s, dlopen exited with dlerror %s\n",
+            argv[0], objectname, dlerror());
         return EXIT_FAILURE;
     }
     start_func_t sym = dlsym(object, "start");
     if(sym == NULL) {
-        printf(
+        fprintf(stderr,
             "%s: Error! Could not locate entry point \"start\" in object file %s, dlsym exited with dlerror %s\n"
             "For information on what kind of entry point is expected, run %s -h for usage information\n",
         argv[0], objectname, dlerror(), argv[0]);
@@ -41,7 +42,7 @@ int main(int argc, char** argv) {
     
     int dlclose_code = dlclose(object);
     if(dlclose_code != 0) {
-        printf(
+        fprintf(stderr,
             "%s: Error! Could not close object file %s properly, dlclose exited with dlerror %s\n",
         argv[0], objectname, dlerror());
     }
